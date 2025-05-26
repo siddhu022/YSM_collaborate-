@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter - EchoNote</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">\
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            overflow-x: hidden;
+        }
+        .nav-item.dropdown:hover .dropdown-menu{
+            display: block;
+        }
+        .dropdown-menu{
+            left: 0;
+            right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            overflow-x: auto;
+        }
+        .dropdown-menu:hover{
+            background-color: antiquewhite;
+            color: #000;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light border-bottom">
+        <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between">
+            <div class="logo h4 m-0 ps-5">
+                Echo <span class="text-primary">Note</span>
+            </div>
+
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link text-dark" href="{{ url_for('index')}}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Latest</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">News</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="{{ url_for('about')}}">About-Us</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="{{ url_for('contact')}}">Contact</a></li>
+
+
+                        <li class="nav-item dropdown position-static">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="departmentDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Department
+                            </a>
+                            <ul class="dropdown-menu w-100 border-0 shadow p-3" aria-labelledby="departmentDropdown" style="max-width: 1000px;">
+                                <div class="container-fluid">
+                                    <div class="row gx-4">
+                                        <div class="col-md-4">
+                                            <li><a class="dropdown-item" href="#">Local Body Tax</a></li>
+                                            <li><a class="dropdown-item" href="#">Water Supply</a></li>
+                                            <li><a class="dropdown-item" href="#">Education</a></li>
+                                            <li><a class="dropdown-item" href="#">Electrical</a></li>
+                                            <li><a class="dropdown-item" href="#">Public Health</a></li>
+                                            <li><a class="dropdown-item" href="#">Law</a></li>
+                                            <li><a class="dropdown-item" href="#">Estate</a></li>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <li><a class="dropdown-item" href="#">Environment</a></li>
+                                            <li><a class="dropdown-item" href="#">Audit</a></li>
+                                            <li><a class="dropdown-item" href="#">Support</a></li>
+                                            <li><a class="dropdown-item" href="#">Tax</a></li>
+                                            <li><a class="dropdown-item" href="#">Procurement</a></li>
+                                            <li><a class="dropdown-item" href="#">Politics</a></li>
+                                            <li><a class="dropdown-item" href="#">Admin</a></li>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <li><a class="dropdown-item" href="#">Public Relations</a></li>
+                                            <li><a class="dropdown-item" href="#">Training</a></li>
+                                            <li><a class="dropdown-item" href="#">Security</a></li>
+                                            <li><a class="dropdown-item" href="#">Quality Control</a></li>
+                                            <li><a class="dropdown-item" href="#">Business Dev</a></li>
+                                            <li><a class="dropdown-item" href="#">Data Science</a></li>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                        </li>
+
+
+                        
+                        <li class="nav-item"><a class="nav-link text-danger fw-bold" href="#">LIVE / LATEST</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary" href="{{ url_for('login')}}">Account</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="alert alert-success">
+        Welcome <strong>{{ user_email }}</strong>! You are logged in.
+    </div>
+
+    <div class="bg-light ps-5 pt-2 pb-2 rounded d-flex flex-wrap w-100">
+        <strong class="me-2 text-danger">TRENDING &gt;</strong> LIVE TV | CBSE 10th Result Out | CBSE 12th Result Out | India Pakistan War | ...
+    </div>
+
+    <main class="container-fluid mt-3">
+        <div class="container-fluid row justify-content-center">
+            <div class="col-lg-8 text-center mb-4">
+                <img src="{{ url_for('static', filename='media/image-container.jpg') }}" alt="breaking news" class="img-fluid rounded">
+                <p class="position-relative mt-3 bg-white p-2 rounded d-inline-block fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, non soluta, iure et maxime repudiandae error odit ipsam ex nisi totam, culpa nihil! Soluta perspiciatis sint iste atque! Recusandae, non!</p>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="mb-3 text-center d-flex">
+                    <img src="{{ url_for('static', filename='media/sindoor.webp') }}" alt="operation" class="img-fluid rounded me-2" style="width: 40%;">
+                    <div class="mt-2">
+                        <div class="text-primary small">Podcast</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+                <div class="mb-3 text-center d-flex">
+                    <img src="{{ url_for('static', filename='media/sindoor.webp') }}" alt="operation" class="img-fluid rounded me-2" style="width: 40%;">
+                    <div class="mt-2">
+                        <div class="text-primary small">Podcast</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+                <div class="mb-3 text-center d-flex">
+                    <img src="{{ url_for('static', filename='media/sindoor.webp') }}" alt="operation" class="img-fluid rounded me-2" style="width: 40%;">
+                    <div class="mt-2">
+                        <div class="text-primary small">Podcast</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+                <div class="mb-3 text-center d-flex">
+                    <img src="{{ url_for('static', filename='media/sindoor.webp') }}" alt="operation" class="img-fluid rounded me-2" style="width: 40%;">
+                    <div class="mt-2">
+                        <div class="text-primary small">Podcast</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+                <div class="mb-3 text-center d-flex">
+                    <img src="{{ url_for('static', filename='media/sindoor.webp') }}" alt="operation" class="img-fluid rounded me-2" style="width: 40%;">
+                    <div class="mt-2">
+                        <div class="text-primary small">Podcast</div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="bg-light p-3 rounded">
+                <h5>India Pakistan war</h5>
+                <p class="mb-1">A brief overview of the recent developments in the India-Pakistan conflict.</p>
+                <p class="text-primary small">Date: 2023-10-01</p>
+                <p class="text-danger small">Author: John Doe</p>
+                <p class="text-info small">Tags: Conflict, India, Pakistan</p>
+                <p class="small">Comments: 0</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="bg-light p-3 rounded">
+                <h5>India Pakistan war</h5>
+                <p class="mb-1">A brief overview of the recent developments in the India-Pakistan conflict.</p>
+                <p class="text-primary small">Date: 2023-10-01</p>
+                <p class="text-danger small">Author: John Doe</p>
+                <p class="text-info small">Tags: Conflict, India, Pakistan</p>
+                <p class="small">Comments: 0</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="bg-light p-3 rounded">
+                <h5>US Elections</h5>
+                <p class="mb-1">An overview of the upcoming US elections and their implications.</p>
+                <p class="text-primary small">Date: 2023-10-02</p>
+                <p class="text-danger small">Author: Jane Smith</p>
+                <p class="text-info small">Tags: Elections, USA</p>
+                <p class="small">Comments: 0</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="bg-light p-3 rounded">
+                <h5>US Elections</h5>
+                <p class="mb-1">An overview of the upcoming US elections and their implications.</p>
+                <p class="text-primary small">Date: 2023-10-02</p>
+                <p class="text-danger small">Author: Jane Smith</p>
+                <p class="text-info small">Tags: Elections, USA</p>
+                <p class="small">Comments: 0</p>
+                </div>
+            </div>
+        </div>
+
+        <section class="bg-light p-4 mt-5 text-center">
+            <h2 class="h4">Subscribe to our Newsletter</h2>
+            <p>Stay updated with the latest news and articles.</p>
+            <form class="d-flex justify-content-center gap-2" method="POST" action="/">
+                <input type="email" name="email" class="form-control w-50" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <p class="mt-3">By subscribing, you agree to our <a href="terms.html">terms and conditions</a>.</p>
+        </section>
+
+        
+        <div class="container-fluid mt-5">
+            <div class="section-title d-flex align-items-center">
+                <h3 class="me-2"><i class="fas fa-newspaper"></i> Latest News</h3>
+                <i class="fas fa-arrow-right ms-auto"></i>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam neque molestias...</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-ipl">IPL</div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, tenetur labore...</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-blog">Blog</div>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, voluptas...</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia magni ullam...</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam neque molestias...</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-ipl">IPL</div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, tenetur labore...</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-blog">Blog</div>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, voluptas...</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia magni ullam...</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia magni ullam...</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia magni ullam...</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia magni ullam...</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="bg-body-secondary p-3 h-100">
+                    <div class="category-title category-cities">Cities</div>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia magni ullam...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid my-5">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+                <h2 class="fs-4 text-dark mb-0">
+                <i class="fas fa-film me-2"></i> Entertainment News
+                </h2>
+                <a href="#" class="text-decoration-none text-dark small">
+                MORE <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="row gx-4 gy-4">
+                <div class="col-12 col-lg-5 d-flex flex-column gap-3 pt-5">
+                    <div>
+                        <span class="d-block text-uppercase fw-bold small text-danger">South Cinema</span>
+                        <p class="mb-0 text-dark small bg-body-secondary p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis sit laudantium eligendi nulla, alias quidem expedita iusto dignissimos vero repellendus fugit ex consectetur adipisci, saepe magnam nobis! Mollitia, officiis accusantium?</p>
+                    </div>
+                    <div>
+                        <span class="d-block text-uppercase fw-bold small text-primary">Movies</span>
+                        <p class="mb-0 text-dark small bg-body-secondary p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt corporis libero beatae temporibus natus vitae perferendis hic! Vero quaerat, eum dolorem ex, maxime reprehenderit nisi possimus saepe quos earum neque.</p>
+                    </div>
+                    <div>
+                        <span class="d-block text-uppercase fw-bold small text-warning">Celebrities</span>
+                        <p class="mb-0 text-dark small bg-body-secondary p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium autem ex laudantium odit, vitae repellendus velit exercitationem debitis delectus a enim sit. Quo quos labore ipsam veniam doloremque quis corrupti.</p>
+                    </div>
+                    <div>
+                        <span class="d-block text-uppercase fw-bold small text-danger">South Cinema</span>
+                        <p class="mb-0 text-dark small bg-body-secondary p-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem debitis odio nulla laboriosam? Perferendis aspernatur officiis dicta, illum qui, similique natus nihil cumque explicabo ipsam inventore iure assumenda quisquam reiciendis.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7">
+                    <div>
+                        <span class="d-block text-uppercase fw-bold small text-danger mb-2">Hollywood</span>
+                        <img src="/static/media/about2.jpg" alt="Emma Roberts" class="img-fluid rounded mb-2">
+                        <h3 class="fs-5 text-dark text-center">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quod vitae nemo praesentium, mollitia debitis! Quas repellat aspernatur amet repudiandae! Aliquam quas ratione quidem aut vero consequatur reiciendis animi ab?
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid my-5">
+            <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4">
+                <h2 class="fs-4 text-dark mb-0">
+                <i class="fas fa-vote-yea me-2"></i> Election News
+                </h2>
+                <a href="#" class="text-decoration-none text-dark small">
+                MORE <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="row gx-4 gy-4">
+                <div class="col-12 col-lg-6">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <img src="/static/media/election4.jpg" alt="Election Image 1" class="img-fluid rounded">
+                        </div>
+                        <div class="col-6">
+                            <img src="/static/media/election2.jpg" alt="Election Image 1" class="img-fluid rounded">
+                        </div>
+                        <div class="col-6">
+                            <img src="/static/media/election2.jpg" alt="Election Image 1" class="img-fluid rounded">
+                        </div>
+                        <div class="col-6">
+                            <img src="/static/media/election4.jpg" alt="Election Image 1" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 d-flex flex-column">
+                    <div class="bg-light rounded p-4 mb-3">
+                        <h5 class="text-dark fw-bold">India Pak War</h5>
+                        <p class="text-dark small mb-1">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, perferendis quidem eum harum beatae mollitia excepturi cumque cum debitis facere a, dolorem nulla rerum voluptatum? Nemo hic beatae natus sequi!
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-light rounded p-4 mb-3">
+                        <h6 class="text-dark fw-semibold">India Pak War</h6>
+                        <p class="text-dark small">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur sint nemo mollitia dolorem, ad eos iusto quasi repellendus ducimus natus eaque sunt ratione reprehenderit voluptatum. Itaque deleniti laudantium possimus ab.
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="bg-light rounded p-4">
+                        <h6 class="text-dark fw-semibold">India Pak War</h6>
+                        <p class="text-dark small">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae quis nobis natus temporibus aliquid quos exercitationem! Dolorem quaerat omnis, excepturi, nam rem blanditiis odit magnam suscipit quidem adipisci quos libero.
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small">
+                        Read Full Article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="mt-5">
+            <h2 class="text-center">Top Stories</h2>
+            <div class="d-flex flex-wrap justify-content-center gap-4">
+                <div class="bg-light p-3 text-center rounded" style="flex: 1 1 22%; min-width: 250px; max-width: 300px;">
+                    <img src="{{ url_for('static', filename='media/section-story.jpg') }}" alt="Top Story" class="img-fluid rounded">
+                    <div class="mt-2">
+                        <h5 class="fw-bold">War</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium praesentium perferendis quisquam esse natus aperiam est asperiores perspiciatis distinctio ipsa quo necessitatibus a, at suscipit delectus tempore illo rerum voluptates.</p>
+                        <div class="text-primary small">Know your</div>
+                    </div>
+                </div>
+        
+                <div class="bg-light p-3 text-center rounded" style="flex: 1 1 22%; min-width: 250px; max-width: 300px;">
+                    <img src="{{ url_for('static', filename='media/section-story.jpg') }}" alt="Top Story" class="img-fluid rounded">
+                    <div class="mt-2">
+                        <h5 class="fw-bold">War</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum voluptates quasi praesentium, quidem recusandae ad totam tempore doloribus cum unde aut esse veniam. Impedit vero, vel aspernatur eaque quae voluptates?</p>
+                        <div class="text-primary small">Know your</div>
+                    </div>
+                </div>
+        
+                <div class="bg-light p-3 text-center rounded" style="flex: 1 1 22%; min-width: 250px; max-width: 300px;">
+                    <img src="{{ url_for('static', filename='media/section-story.jpg') }}" alt="Top Story" class="img-fluid rounded">
+                    <div class="mt-2">
+                        <h5 class="fw-bold">War</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi molestiae quas praesentium veritatis nobis perferendis ipsam alias facere quis eaque facilis porro, maxime debitis corrupti eligendi minus illo optio enim.</p>
+                        <div class="text-primary small">Know your</div>
+                    </div>
+                </div>
+        
+                <div class="bg-light p-3 text-center rounded" style="flex: 1 1 22%; min-width: 250px; max-width: 300px;">
+                    <img src="{{ url_for('static', filename='media/section-story.jpg') }}" alt="Top Story" class="img-fluid rounded">
+                    <div class="mt-2">
+                        <h5 class="fw-bold">War</h5>
+                        <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates cupiditate ipsa odit illo quibusdam tempore in sint, animi illum incidunt itaque iste alias architecto optio excepturi impedit temporibus eius commodi.</p>
+                        <div class="text-primary small">Know your</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+        <section class="row mt-5 align-items-start">
+        <div class="col-lg-9">
+            <div class="ratio ratio-16x9">
+            <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="col-lg-3 d-flex flex-column gap-3">
+            <div class="bg-light p-3 rounded text-center">
+                <h5>Top Stories</h5>
+                <p class="text-muted">Check out the latest updates and highlights from around the world.</p>
+            </div>
+            <div class="bg-light p-3 rounded text-center">
+                <h5>Top Stories</h5>
+                <p class="text-muted">Check out the latest updates and highlights from around the world.</p>
+            </div>
+            <div class="bg-light p-3 rounded text-center">
+                <h5>Top Stories</h5>
+                <p class="text-muted">Check out the latest updates and highlights from around the world.</p>
+            </div>
+            <div class="bg-light p-3 rounded text-center">
+                <h5>Top Stories</h5>
+                <p class="text-muted">Check out the latest updates and highlights from around the world.</p>
+            </div>
+        </div>
+        </section>
+    </main>
+
+    <footer class="bg-light text-center py-4 mt-5">
+        <h2 class="h4">EchoNote</h2>
+        <p>Your go-to platform for all your note-taking needs.</p>
+        <div class="footer-links my-3">
+            <a href="#" class="text-decoration-none mx-2">Privacy</a>
+            <a href="#" class="text-decoration-none mx-2">Terms</a>
+            <a href="#" class="text-decoration-none mx-2">Contact</a>
+            <a href="#" class="text-decoration-none mx-2">About</a>
+            <a href="#" class="text-decoration-none mx-2">Blog</a>
+            <a href="#" class="text-decoration-none mx-2">Services</a>
+            <a href="#" class="text-decoration-none mx-2">Newsletter</a>
+            <a href="#" class="text-decoration-none mx-2">Account</a>
+        </div>
+        <div class="footer-bottom small">
+            <p>&copy; 2025 EchoNote. All rights reserved.</p>
+            <p>Designed by <a href="siddhesh"> Siddhesh</a></p>
+            <p><a href="#">Back to top</a></p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

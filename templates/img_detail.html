@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newsletter - EchoNote</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Times New Roman", Times, serif;
+      }
+      .file-upload {
+        border: 1px dashed black;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        color: black;
+        transition: 0.3s;
+      }
+
+      .file-upload:hover {
+        background-color: #f8f9fa;
+      }
+
+      input[type="file"] {
+        display: none;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      #preview {
+        max-height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+        <header class="bg-light border-bottom">
+        <div class="container-fluid d-flex flex-wrap align-items-center justify-content-between">
+            <div class="logo h4 m-0 ps-5">
+                Echo <span class="text-primary">Note</span>
+            </div>
+
+            <nav class="navbar navbar-expand-lg">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link text-dark" href="{{ url_for('index')}}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Latest</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">News</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Entertainment</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Sports</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="{{ url_for('about')}}">About-Us</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="{{ url_for('contact')}}">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Election</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Health</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" href="#">Videos</a></li>
+                        <li class="nav-item"><a class="nav-link text-danger fw-bold" href="#">LIVE / LATEST</a></li>
+                        <li class="nav-item"><a class="nav-link text-primary" href="{{ url_for('login')}}">Account</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+      <div class="card shadow p-4 bg-white rounded">
+        <form action="/" method="post" enctype="multipart/form-data">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <h2 class="text-primary mb-4">Upload Newsletter Details</h2>
+
+              <div class="mb-3">
+                <label for="News_name" class="form-label"
+                  >Newsletter Title:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="News_name"
+                  name="News_name"
+                  placeholder="Enter your newsletter title"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="newspaper" class="form-label"
+                  >Newspaper Name:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newspaper"
+                  name="newspaper"
+                  placeholder="e.g. The Times of India"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="date" class="form-label">Date:</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="date"
+                  name="date"
+                  required
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea
+                  class="form-control"
+                  id="description"
+                  name="description"
+                  rows="4"
+                  placeholder="Write a short description..."
+                  required
+                ></textarea>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label">Upload Image:</label>
+                <label class="file-upload w-100">
+                  <input type="file" id="image" name="image" required />
+                  📁 Click to select image
+                </label>
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-6">
+              <h2 class="text-primary mb-4">Additional Info</h2>
+
+              <div class="mb-3">
+                <label for="tags" class="form-label">Tags:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tags"
+                  name="tags"
+                  placeholder="e.g. politics, sports, economy"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Image Preview:</label>
+                <div class="border rounded p-3 text-center bg-light">
+                  <img
+                    id="preview"
+                    src="#"
+                    alt="Image Preview"
+                    class="img-fluid d-none"
+                  />
+                  <small class="text-muted" id="no-image"
+                    >No image selected</small
+                  >
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <button type="submit" class="btn btn-primary w-100">
+                  Submit Newsletter
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <footer class="bg-light text-center py-4 mt-5">
+      <h2 class="h4">EchoNote</h2>
+      <p>Your go-to platform for all your note-taking needs.</p>
+      <div class="footer-links my-3">
+        <a href="#" class="text-decoration-none mx-2">Privacy</a>
+        <a href="#" class="text-decoration-none mx-2">Terms</a>
+        <a href="#" class="text-decoration-none mx-2">Contact</a>
+        <a href="#" class="text-decoration-none mx-2">About</a>
+        <a href="#" class="text-decoration-none mx-2">Blog</a>
+        <a href="#" class="text-decoration-none mx-2">Services</a>
+        <a href="#" class="text-decoration-none mx-2">Newsletter</a>
+        <a href="#" class="text-decoration-none mx-2">Account</a>
+      </div>
+      <div class="footer-bottom small">
+        <p>&copy; 2025 EchoNote. All rights reserved.</p>
+        <p>
+          Designed by
+          <a href="https://www.linkedin.com/in/shamsuddin-hamdule/">
+            Shamsuddin</a
+          >
+        </p>
+        <p><a href="#">Back to top</a></p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

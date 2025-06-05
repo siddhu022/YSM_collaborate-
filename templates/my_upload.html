@@ -12,7 +12,7 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      font-family: "Times New Roman", Times, serif;
+      font-family: 'Times New Roman', Times, serif;
       background-color: #f4f4f4;
     }
 
@@ -96,6 +96,7 @@
       transform: translateY(-5px);
     }
 
+
     .card-body h5 {
       margin-bottom: 10px;
       font-size: 1rem;
@@ -131,17 +132,17 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('home') }}">Home</a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="/about">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/services">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
-          </li> -->
-          <li class="nav-item">
             <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
@@ -150,8 +151,8 @@
       </div>
     </div>
   </nav>
-  <div class="app-wrapper" style="height: 85vh;">
-    <aside class="sidebar" style="background-color: #bfd3e2">
+  <div class="app-wrapper" style="height: 92vh;">
+    <aside class="sidebar" style="background-color: #bfd3e2;">
       <img src="/static/media/image.png" alt="Profile" class="profile-img" />
       <h4 class="text-center">
         {% if session.user_role == 'admin' %}Admin{% else %}Employee{% endif
@@ -159,7 +160,7 @@
       </h4>
       <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary btn-sidebar">Dashboard</a>
       <a href="{{ url_for('image_upload') }}" class="btn btn-outline-primary btn-sidebar">Image Upload</a>
-      <a href="{{ url_for('my_upload') }}" class="btn btn-outline-primary btn-sidebar">My Uploads</a>
+      <a href="{{ url_for('my_upload') }}" class="btn btn-outline-primary btn-sidebar">My Upload</a>
       {% if session.user_role == 'admin' %}
       <a href="{{ url_for('dashboard', section='manage_users') }}" class="btn btn-outline-success btn-sidebar">Manage
         Users</a>
@@ -167,58 +168,7 @@
     </aside>
 
     <main class="main-content" style="background-color: #e3f2fd;">
-      <div class="container-fluid" style="background-color: #e3f2fd; padding: 10px; margin: 0">
-        <div class="container">
-          <form class="row align-items-center mb-3" method="get" action="{{ url_for('dashboard') }}">
-            <div class="col-auto">
-              <label for="filter-type" class="form-label fw-bold me-2 mb-0">Filter</label>
-            </div>
 
-            <div class="col-md-2">
-              <select class="form-select" id="filter-type" onchange="toggleFilterInputs()">
-                <option value="">Select Filter Type</option>
-                <option value="department" {% if selected_department and selected_department !="All" %}selected{% endif
-                  %}>By Department</option>
-                <option value="date" {% if selected_date and selected_date !="All" %}selected{% endif %}>By Date
-                </option>
-                <option value="impact" {% if selected_impact and selected_impact !="All" %}selected{% endif %}>By Impact
-                </option>
-              </select>
-            </div>
-
-            <div class="col-md-3" id="department-filter" style="display: none;">
-              <select class="form-select" id="department-select" name="select">
-                <option value="All">All Departments</option>
-                {% for dept in departments %}
-                <option value="{{ dept }}" {% if dept==selected_department %}selected{% endif %}>{{ dept }}</option>
-                {% endfor %}
-              </select>
-            </div>
-
-            <div class="col-md-3" id="date-filter" style="display: none;">
-              <select class="form-select" id="date-select" name="date">
-                <option value="All">All Dates</option>
-                {% for dt in dates %}
-                <option value="{{ dt }}" {% if dt==selected_date %}selected{% endif %}>{{ dt }}</option>
-                {% endfor %}
-              </select>
-            </div>
-
-            <div class="col-md-3" id="impact-filter" style="display: none;">
-              <select class="form-select" id="impact-select" name="impact">
-                <option value="All">All Impacts</option>
-                {% for impact in impacts %}
-                <option value="{{ impact }}" {% if impact==selected_impact %}selected{% endif %}>{{ impact }}</option>
-                {% endfor %}
-              </select>
-            </div>
-
-            <div class="col-md-2">
-              <button type="submit" class="btn btn-primary w-100">Apply Filter</button>
-            </div>
-          </form>
-        </div>
-      </div>
 
       {% if section == 'manage_users' and session.user_role == 'admin' %}
       <h3 class="mb-4">Manage Users</h3>
@@ -240,16 +190,12 @@
               <td>{{ user.id }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.role }}</td>
+              <td>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else 'N/A' }}</td>
               <td>
-                {{ user.created_at.strftime('%Y-%m-%d') if user.created_at
-                else 'N/A' }}
-              </td>
-              <td>
-                <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display: inline-block"
+                <!--<a href="{{ url_for('edit_user', user_id=user.id) }}" class="btn btn-warning btn-sm me-2">Edit</a>-->
+                <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display:inline-block;"
                   onsubmit="return confirm('Are you sure you want to delete this user?');">
-                  <button type="submit" class="btn btn-danger btn-sm">
-                    Delete
-                  </button>
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
               </td>
             </tr>
@@ -259,11 +205,14 @@
       </div>
       {% else %}
       <p>No users found.</p>
-      {% endif %} {% else %}
+      {% endif %}
+      {% else %}
+
 
       <h3 class="mb-4">News Clipping</h3>
       <div class="row">
-        {% if news_items %} {% for news in news_items %}
+        {% if news_items %}
+        {% for news in news_items %}
         <div class="col-md-6 col-lg-3">
           <div class="card news-card">
             <img src="{{ news.image_url }}" class="card-img-top" alt="News Image" />
@@ -279,15 +228,14 @@
               {% if session.user_role == 'admin' %}
               <form action="{{ url_for('delete_news', news_id=news.id) }}" method="POST" class="mt-2">
                 <button type="submit" class="btn btn-danger btn-sm float-end"
-                  onclick="return confirm('Are you sure you want to delete this news?');">
-                  Delete
-                </button>
+                  onclick="return confirm('Are you sure you want to delete this news?');">Delete</button>
               </form>
               {% endif %}
             </div>
           </div>
         </div>
-        {% endfor %} {% else %}
+        {% endfor %}
+        {% else %}
         <p>No news items uploaded yet.</p>
         {% endif %}
       </div>
@@ -316,19 +264,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function toggleFilterInputs() {
-      const filterType = document.getElementById('filter-type').value;
-
-      document.getElementById('department-filter').style.display = (filterType === 'department') ? 'block' : 'none';
-      document.getElementById('date-filter').style.display = (filterType === 'date') ? 'block' : 'none';
-      document.getElementById('impact-filter').style.display = (filterType === 'impact') ? 'block' : 'none';
-    }
-
-    window.onload = toggleFilterInputs;
-  </script>
-
-
 </body>
 
 </html>

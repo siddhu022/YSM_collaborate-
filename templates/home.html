@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home - EchoNote</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    * {
+      scroll-behavior: smooth;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: "Times New Roman", Times, serif;
+      background-color: #f4f4f4;
+    }
+
+    .hero-section {
+      background-color: #e3f2fd;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .feature-card {
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #0d6efd;
+    }
+
+    .nav-item a {
+      text-decoration: none;
+    }
+
+    .nav-item a:hover {
+      text-decoration: underline;
+    }
+
+    .about-section {
+      background-color: #e3f2fd;
+      padding: 60px 0;
+    }
+
+    .team-card {
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .team-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 15px;
+      border: 3px solid #0d6efd;
+    }
+
+    .services-hero {
+      background-color: #e3f2fd;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .service-card {
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      color: #0d6efd;
+      margin-bottom: 20px;
+    }
+
+    .pricing-card {
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      text-align: center;
+    }
+
+    .pricing-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .pricing-header {
+      border-bottom: 1px solid #eee;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    .contact-section {
+      background-color: #e3f2fd;
+      padding: 60px 0;
+    }
+
+    .contact-card {
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      color: #0d6efd;
+      margin-bottom: 15px;
+    }
+
+    .form-control:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="/static/media/logo1.png" alt="logo" width="50px">EchoNote</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="{{ url_for('home') }}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+          </li>
+          {% if 'logged_in' in session %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section" style="padding-top: 100px;">
+    <div class="container">
+      <h1 class="display-4 mb-4">Welcome to EchoNote</h1>
+      <p class="lead mb-5">A comprehensive solution for <B style="color:#ff0000; font-size: larger;">Nashik Municipal
+          Corporation</B> for managing and organizing news clippings efficiently</p>
+      {% if 'logged_in' not in session %}
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-4 me-2">Login</a>
+      <a href="{{ url_for('registration') }}" class="btn btn-outline-primary btn-lg px-4">Register</a>
+      {% else %}
+      <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg px-4">Go to Dashboard</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Key Features</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-card p-4 text-center">
+            <div class="feature-icon">
+              <i class="bi bi-upload"></i>
+            </div>
+            <h3>Upload Clipping</h3>
+            <p>Quickly upload news clippings with automatic categorization and tagging.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card p-4 text-center">
+            <div class="feature-icon">
+              <i class="bi bi-search"></i>
+            </div>
+            <h3>Search by Department / Date</h3>
+            <p>Find exactly what you need with advanced filtering and search capabilities.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-card p-4 text-center">
+            <div class="feature-icon">
+              <i class="bi bi-shield-lock"></i>
+            </div>
+            <h3>Protected Records</h3>
+            <p>Your data is protected with enterprise-grade security measures.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="container">
+      <h1 class="text-center mb-5">About EchoNote</h1>
+      <div class="row">
+        <div class="col-lg-6">
+          <h2>Our Mission</h2>
+          <p>
+            At EchoNote, our mission is to empower individuals and teams to capture, organize, and share their ideas
+            seamlessly. We strive to provide a user-friendly platform that enhances productivity and fosters
+            collaboration through innovative note-taking solutions.
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <h2>Our Vision</h2>
+          <p>
+            Our vision is to become the leading digital workspace for creative minds and professionals worldwide. We aim
+            to continuously evolve our platform, integrating the latest technologies to make information management
+            effortless and accessible for everyone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Meet Our Team</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="team-card">
+            <img src="../static/media/download.jpg" alt="Team Member" class="team-img">
+            <h3>Shamsuddin</h3>
+            <p class="text-muted">Developer & Presenter</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="team-card">
+            <img src="../static/media/download.jpg" alt="Team Member" class="team-img">
+            <h3>Siddesh</h3>
+            <p class="text-muted">Developer</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services-hero" id="services">
+    <div class="container">
+      <h1 class="display-4 mb-4">Our Services</h1>
+      <p class="lead">Discover how EchoNote can transform your news clipping management process with our comprehensive
+        suite of services.</p>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="bi bi-cloud-upload"></i>
+            </div>
+            <h3>Scan & Upload Daily Articles</h3>
+            <p>Efficiently upload and organize digital news clippings with our intuitive interface and automated
+              categorization.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="bi bi-tags"></i>
+            </div>
+            <h3>Auto-Categorize by Department</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="bi bi-search"></i>
+            </div>
+            <h3>Advanced Search</h3>
+            <p>Powerful search functionality to find exactly what you need across your entire clipping archive.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="bi bi-share"></i>
+            </div>
+            <h3>Collaboration Tools</h3>
+            <p>Share clippings with team members and collaborate.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h1 class="text-center mb-5">Contact Us</h1>
+      <div class="row justify-content-center">
+        <div class="col-lg-12 text-center">
+          <div class="contact-card h-100">
+            <h2 class="mb-4">Our Information</h2>
+            <div class="row text-start">
+              <div class="col-md-4 mb-4">
+                <div class="contact-icon text-center">
+                  <i class="bi bi-geo-alt"></i>
+                </div>
+                <h4 class="text-center">Address</h4>
+                <p class="text-center">
+                  Nashik Municipal Corporation <br />
+                  Rajiv Gandhi Bhavan,<br />
+                  Sharanpur Road, Nashik
+                </p>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="contact-icon text-center">
+                  <i class="bi bi-telephone"></i>
+                </div>
+                <h4 class="text-center">Phone</h4>
+                <p class="text-center">0253-2575631 / 2 / 3 / 4</p>
+                <h4 class="text-center">Grievance Helpline</h4>
+                <p class="text-center">+91-7030300300</p>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="contact-icon text-center">
+                  <i class="bi bi-envelope"></i>
+                </div>
+                <h4 class="text-center">Email</h4>
+                <p class="text-center">
+                  info@echonote.com<br />
+                  support@echonote.com
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="ratio ratio-16x9">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.755837866475!2d72.8282143153787!3d19.03345825822744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ced3d31e2a1d%3A0x3b6df5a9a4a7c1e5!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+              width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-primary py-3 mt-auto" style="background-color: #f4f4f4;">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
+      <p class="mb-2 mb-md-0">&copy; EchoNote. All rights reserved.</p>
+      <ul class="nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-dark">Privacy Policy</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-dark">About-us</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-dark">Terms of Use</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link px-2 text-dark">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
